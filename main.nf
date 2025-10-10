@@ -33,12 +33,10 @@ process FASTQC {
     tuple val(meta), path(reads)
 
     output:
-    path "${prefix}_fastqc.zip"
-    path "${prefix}_fastqc.html"
+    path "*_fastqc.zip"
+    path "*_fastqc.html"
 
     script:
-    def prefix = meta.run == "0" ? "${meta.sample}" : "${meta.sample}_run${meta.run}"
-
     """
     fastqc \\
         --threads ${task.cpus} \\
