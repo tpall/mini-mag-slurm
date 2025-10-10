@@ -8,7 +8,7 @@
             "sample": {
                 "type": "string",
                 "pattern": "^\\S+$",
-                "meta": ["id"],
+                "meta": ["sample"],
                 "errorMessage": "Sample needs to be string or integer with no spaces!"
             },
             "run": {

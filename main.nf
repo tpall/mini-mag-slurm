@@ -23,17 +23,25 @@ workflow {
 process FASTQC {
     tag "${meta.id}"
     publishDir "results/fastqc", mode: 'copy', overwrite: true
-    
+
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/fastqc:0.12.1--hdfd78af_0' :
+        'biocontainers/fastqc:0.12.1--hdfd78af_0' }"
+    label 'process_medium'
+
     input: 
     tuple val(meta), path(reads)
 
     output:
-    path "${meta.id}_${meta.run}_fastqc.zip"
-    path "${meta.id}_${meta.run}_fastqc.html"
+    path "${prefix}_fastqc.zip"
+    path "${prefix}_fastqc.html"
 
     script:
+    def prefix = meta.run == "0" ? "${meta.sample}" : "${meta.sample}_run${meta.run}"
+
     """
-    touch "${meta.id}_${meta.run}_fastqc.zip"
-    touch "${meta.id}_${meta.run}_fastqc.html"
+    fastqc \\
+        --threads ${task.cpus} \\
+        ${reads.join(' ')} \\
     """
 }
