@@ -27,7 +27,7 @@ process FASTQC {
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/fastqc:0.12.1--hdfd78af_0' :
         'biocontainers/fastqc:0.12.1--hdfd78af_0' }"
-    label 'process_medium'
+    // label 'process_medium'
 
     input: 
     tuple val(meta), path(reads)
