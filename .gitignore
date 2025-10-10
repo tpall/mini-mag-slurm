@@ -1,4 +1,5 @@
 results
 work
 .nextflow
+.nextflow.log*
 
