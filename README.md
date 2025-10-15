@@ -1,40 +1,41 @@
-## Mini-MAG-slurm
+# NCBI Datasets
 
-The idea is to create a **minimal** Nextflow metagenomics workflow, similar to nf-core/mag, runnable on a SLURM array.
+https://www.ncbi.nlm.nih.gov/datasets
 
-Maybe there is nothing here yet. I might be failed with this project. It's ok.
-But I will try again.
+This zip archive contains an NCBI Datasets Data Package.
 
-### Usage
+NCBI Datasets Data Packages can include sequence, annotation and other data files, and metadata in one or more data report files.
+Data report files are in JSON Lines format.
 
-```bash
-nextflow run main.nf -profile slurm --reads '*_R{1,2}.fastq.gz' --outdir results
-```
+---
+## FAQs
+### Where is the data I requested?
 
-### Requirements
+Your data is in the subdirectory `ncbi_dataset/data/` contained within this zip archive.
 
-- Nextflow>=24.04.0 (we assume that these vesions come with array job support)
-- Singularity
-- SLURM cluster
-- Input fastq files named as `SAMPLEID_R1.fastq.gz` and `SAMPLEID_R2.fastq.gz`
-- Reference human genome, and databases for GTDB-Tk, DRAM (see `conf/params.config` for details)
+### I still can't find my data, can you help?
 
-### Workflow Steps
+We have identified a bug affecting Mac Safari users. When downloading data from the NCBI Datasets web interface, you may see only this README file after the download has completed (while other files appear to be missing).
+As a workaround to prevent this issue from recurring, we recommend disabling automatic zip archive extraction in Safari until Apple releases a bug fix.
+For more information, visit:
+https://www.ncbi.nlm.nih.gov/datasets/docs/reference-docs/mac-zip-bug/
 
-1. Quality control of raw reads with FastQC
-3. Read trimming with fastp
-4. Host (human) read removal with Bowtie2
-5. PhiX read removal with Bowtie2
-6. Post-trimming quality control with FastQC
-7. Concatenate reads from multiple runs for each sample
-8. Normalize read coverage with BBNorm
-9. Assembly with MEGAHIT
-10. Assembly quality assessment with QUAST
-11. Map reads to contigs with Bowtie2
-12. Binning with MetaBAT2, CONCOCT, and MaxBin2
-13. Bin refinement with DAS Tool
-14. Bin quality assessment refined bins with CheckM
-15. Taxonomic assignment of refined bins with GTDB-Tk
-16. Reporting with MultiQC
-17. Functional annotation with DRAM
+### How do I work with JSON Lines data reports?
 
+Visit our JSON Lines data report documentation page:
+https://www.ncbi.nlm.nih.gov/datasets/docs/v2/tutorials/working-with-jsonl-data-reports/
+
+### What is NCBI Datasets?
+
+NCBI Datasets is a resource that lets you easily gather data from across NCBI databases. Find and download gene, transcript, protein and genome sequences, annotation and metadata.
+
+### Where can I find NCBI Datasets documentation?
+
+Visit the NCBI Datasets documentation pages:
+https://www.ncbi.nlm.nih.gov/datasets/docs/
+
+---
+
+National Center for Biotechnology Information
+National Library of Medicine
+info@ncbi.nlm.nih.gov
